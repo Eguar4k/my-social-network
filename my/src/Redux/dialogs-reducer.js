@@ -25,7 +25,7 @@ const UPDATE_MESSAGE_TEXT = "UPDATE-MESSAGE-TEXT";
 const dialogsReducer = (state = initialState, action) => {
   // debugger;
   switch (action.type) {
-    case ADD_MESSAGE:
+    case ADD_MESSAGE: {
       let mes = {
         id: "7",
         message: state.newMessageText,
@@ -34,13 +34,20 @@ const dialogsReducer = (state = initialState, action) => {
         id: "7",
         name: "Igor",
       };
-      state.message.push(mes);
-      state.dialog.push(dialog);
-      state.newMessageText = "";
-      return state;
-    case UPDATE_MESSAGE_TEXT:
-      state.newMessageText = action.newText;
-      return state;
+      //Смотри пояснения в readme к 47 уроку
+      let stateCopy = { ...state };
+      stateCopy.dialog = [...state.dialog];
+      stateCopy.message = [...state.message];
+      stateCopy.message.push(mes);
+      stateCopy.dialog.push(dialog);
+      stateCopy.newMessageText = "";
+      return stateCopy;
+    }
+    case UPDATE_MESSAGE_TEXT: {
+      let stateCopy = { ...state };
+      stateCopy.newMessageText = action.newText;
+      return stateCopy;
+    }
     default:
       return state;
   }

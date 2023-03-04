@@ -7,25 +7,29 @@ import ReactDOM from "react-dom/client";
 import App from "./App";
 import { BrowserRouter } from "react-router-dom";
 import "./index.css";
-import { Provider } from "./storeContext";
+import { Provider } from "react-redux";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
-export let rerenderEntierTree = (state) => {
-  // debugger;
-  root.render(
-    <React.StrictMode>
-      <Provider store={store}>
-        <BrowserRouter>
-          <App />
-        </BrowserRouter>
-      </Provider>
-    </React.StrictMode>
-  );
-};
-rerenderEntierTree(store.getState());
-store.subscribe(() => {
-  let state = store.getState();
-  rerenderEntierTree(state);
-});
+// export let rerenderEntierTree = (state) => {
+// debugger;
+root.render(
+  <React.StrictMode>
+    <Provider store={store}>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </Provider>
+  </React.StrictMode>
+);
+// };
+
+// rerenderEntierTree();
+
+// Убрали после внесения функции connect в контейнерных компонентах, так как в них скрытта подписка на изменение их части стейта
+
+// store.subscribe(() => {
+//   let state = store.getState();
+//   rerenderEntierTree(state);
+// });
 
 reportWebVitals();

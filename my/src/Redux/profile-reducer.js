@@ -15,19 +15,24 @@ const UPDATE_NEW_POST_TEXT = "UPDATE-NEW-POST-TEXT";
 const profileReducer = (state = initialState, action) => {
   // debugger;
   switch (action.type) {
-    case ADD_POST:
+    case ADD_POST: {
       let mes = {
         id: "6",
         message: state.newPostText,
         liksCounter: "0",
       };
-
-      state.posts.push(mes);
-      state.newPostText = "";
-      return state;
-    case UPDATE_NEW_POST_TEXT:
-      state.newPostText = action.newText;
-      return state;
+      //Смотри пояснения в readme к 47 уроку
+      let stateCopy = { ...state };
+      stateCopy.posts = [...state.posts];
+      stateCopy.posts.push(mes);
+      stateCopy.newPostText = "";
+      return stateCopy;
+    }
+    case UPDATE_NEW_POST_TEXT: {
+      let stateCopy = { ...state };
+      stateCopy.newPostText = action.newText;
+      return stateCopy;
+    }
     default:
       return state;
   }

@@ -1,7 +1,7 @@
 import React from "react";
 import s from "./Navbar.module.css";
 import { NavLink } from "react-router-dom";
-import NavbarFrends from "./NavbarFrends";
+import NavbarFrendsContainer from "./NavbarFrendsContainer";
 
 const Navbar = (props) => {
   // debugger;
@@ -47,7 +47,7 @@ const Navbar = (props) => {
         >
           Settings
         </NavLink>
-        <NavbarFrends />
+        <NavbarFrendsContainer />
       </div>
     </nav>
   );
