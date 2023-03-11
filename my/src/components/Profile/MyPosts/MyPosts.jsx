@@ -5,7 +5,7 @@ import Post from "./Post/Post";
 const MyPosts = (props) => {
   // debugger;
   let postsElement = props.posts.map((p) => (
-    <Post message={p.message} LiksCounter={p.liksCounter} />
+    <Post message={p.message} key={p.id} LiksCounter={p.liksCounter} />
   ));
 
   // Создаем ссылку для взаимодействия тексэрия и кнопки
@@ -38,7 +38,7 @@ const MyPosts = (props) => {
       </div>
 
       <div>
-        <button classeName={s.button} onClick={onAddPost}>
+        <button className={s.button} onClick={onAddPost}>
           Add post
         </button>
       </div>

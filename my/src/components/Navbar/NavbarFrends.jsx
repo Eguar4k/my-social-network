@@ -6,7 +6,7 @@ const NavbarFrends = (props) => {
   // debugger;
 
   let AvatarElements = props.state.map((a) => (
-    <Avatar name={a.name} img={a.img} />
+    <Avatar name={a.name} key={a.id} img={a.img} />
   ));
   return (
     <div>
