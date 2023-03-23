@@ -7,8 +7,8 @@ const Profile = (props) => {
   // debugger;
   return (
     <div className={s.profile}>
-      <ProfileInfo />
-      <MyPostsContainer />
+      <ProfileInfo profile={props.profile} />
+      <MyPostsContainer {...props} />
     </div>
   );
 };

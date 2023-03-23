@@ -3,7 +3,7 @@ import Dialogs from "./Dialogs";
 import {
   addMessageTextActionCreator,
   updateMessageTextActionCreator,
-} from "../../Redux/dialogs-reducer";
+} from "../../redux/dialogs-reducer";
 // import StoreContext from "../../storeContext";
 import { connect } from "react-redux";
 

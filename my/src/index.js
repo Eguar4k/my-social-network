@@ -1,6 +1,6 @@
 import reportWebVitals from "./reportWebVitals";
 // import { rerenderEntierTree } from "./render";
-import store from "./Redux/redux-store";
+import store from "./redux/redux-store";
 //с файла render.js
 import React from "react";
 import ReactDOM from "react-dom/client";
