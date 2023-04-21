@@ -8,11 +8,13 @@
     padding: 20px;
 }
 
-
-
-
+.formControl {
+    border: solid red 3px;
+}
 
 .messages {
 padding: 20px;
 }
 
+.error {
+    color: yellow;}

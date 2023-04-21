@@ -11,3 +11,9 @@
     color: white;
     border: 2px solid white;
 }
+.error{
+    color: yellow;
+}
+.formControl{
+    border:solid red 3px ;
+}

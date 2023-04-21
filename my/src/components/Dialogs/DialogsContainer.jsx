@@ -2,9 +2,9 @@
 import Dialogs from "./Dialogs";
 
 import {
-  addMessageTextActionCreator,
-  updateMessageTextActionCreator,
-} from "../../redux/dialogs-reducer";
+  addMessageText,
+  // updateMessageText,
+} from "../../redux/dialogs-reducer.js";
 // import StoreContext from "../../storeContext";
 import { connect } from "react-redux";
 import { withAuthNavigate } from "./../../hoc/withAuthNavigate";
@@ -16,18 +16,18 @@ let mapStateToProps = (state) => {
   };
 };
 
-let mapDispatchToProps = (dispatch) => {
-  return {
-    upMessageText: (text) => {
-      dispatch(updateMessageTextActionCreator(text));
-    },
-    newMessage: () => {
-      dispatch(addMessageTextActionCreator());
-    },
-  };
-};
+// let mapDispatchToProps = (dispatch) => {
+//   return {
+//     upMessageText: (text) => {
+//       dispatch(updateMessageText(text));
+//     },
+//     newMessage: () => {
+//       dispatch(addMessageText());
+//     },
+//   };
+// };
 
 export default compose(
-  connect(mapStateToProps, mapDispatchToProps),
+  connect(mapStateToProps, { addMessageText }),
   withAuthNavigate
 )(Dialogs);

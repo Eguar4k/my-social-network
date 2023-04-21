@@ -9,6 +9,11 @@ import { BrowserRouter } from "react-router-dom";
 import "./index.css";
 import { Provider } from "react-redux";
 
+// использовали когда проверяли библиотеку reselect
+// setInterval(() => {
+//   store.dispatch({ type: "FAKE" });
+// }, 1000);
+
 const root = ReactDOM.createRoot(document.getElementById("root"));
 // export let rerenderEntierTree = (state) => {
 // debugger;

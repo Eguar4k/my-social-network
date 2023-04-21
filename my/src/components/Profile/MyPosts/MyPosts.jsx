@@ -1,49 +1,78 @@
 import React from "react";
 import s from "./MyPosts.module.css";
 import Post from "./Post/Post";
+import { useForm } from "react-hook-form";
 
-const MyPosts = (props) => {
-  // debugger;
-  let postsElement = props.posts.map((p) => (
-    <Post message={p.message} key={p.id} LiksCounter={p.liksCounter} />
-  ));
+// window.props = [];
 
-  // Создаем ссылку для взаимодействия тексэрия и кнопки
-  let newPostElem = React.createRef();
+class MyPosts extends React.Component {
+  // constructor(props) {
+  //   super(props);
+  // }
+  shouldComponentUpdate(nextProps, nextState) {
+    return this.props !== nextProps || this.state !== nextState;
+    // const currentProps = this.props;
+    // const currentState = this.state;
+    // return (
+    //   Object.keys(nextProps).some(
+    //     (prop) => nextProps[prop] !== currentProps[prop]
+    //   ) ||
+    //   Object.keys(nextState).some(
+    //     (prop) => nextState[prop] !== currentState[prop]
+    //   )
+    // );
+  }
+  render() {
+    // console.log(this.props);
+    const { props } = this;
 
-  const onAddPost = () => {
-    props.addPost();
+    // window.props.push(props);
+    // console.log("RERENDER");
+    let postsElement = props.posts.map((p) => (
+      <Post message={p.message} key={p.id} LiksCounter={p.liksCounter} />
+    ));
+
+    return (
+      <div className={s.myposts}>
+        <MyPostsForm {...props} />
+        {postsElement}
+      </div>
+    );
+  }
+}
+
+const MyPostsForm = (props) => {
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm({ mode: "onBlur" });
+  const onSubmit = (data) => {
+    props.addPost(data.newPostText);
+    reset();
   };
-
-  const onPostChange = () => {
-    let text = newPostElem.current.value;
-    props.upNewPostText(text);
-  };
-  // (Lessons 31,32,33) value,  каждый символ в textarea, мы берем из BLL, в стейте.Делаем мы это через props.
-  // Чтобы добавить каждый символ в стейт, т.е.наше value, мы используем обработчик onChange.Программируем наш onChange,
-  // чтобы value(символ который мы  нажали) передавался в стейт.Делаем это через функцию update, которая должна лежать со
-  // стейтом в BLL.Прокидываем эту функцию через props в нашу компоненту.В обработчике пишем, вызови update(со значением
-  // value(символ)).т.е.то, что мы ввели, через функцию записывается в какой - то массив в стейте.А textarea говорит: О!
-  // Сейчас кто - то ввел символ и  мой value стал тем, что ввели.Быстренько отображаю это, в поле ввода.Получается,
-  // сначала поменялся state в BLL, а потом Ui в textarea.Это концепция Flux архитектуры.
-
+  const hasError = errors?.newPostText;
+  // console.log(errors);
   return (
-    <div className={s.myposts} posts={props.posts}>
+    <form className={s.myposts} onSubmit={handleSubmit(onSubmit)}>
       <div>
         <textarea
-          ref={newPostElem}
-          value={props.newPostText}
-          onChange={onPostChange}
+          className={hasError && s.formControl}
+          {...register("newPostText", {
+            required: "Post is require field!",
+            maxLength: { value: 30, message: "Max length is 30 simbols" },
+          })}
+          placeholder="new post"
         />
+        {hasError && (
+          <div className={s.error}>{errors.newPostText.message}</div>
+        )}
       </div>
-
       <div>
-        <button className={s.button} onClick={onAddPost}>
-          Add post
-        </button>
+        <button>Add post</button>
       </div>
-      {postsElement}
-    </div>
+    </form>
   );
 };
 export default MyPosts;

@@ -14,7 +14,7 @@ let initialState = {
 };
 
 const ADD_POST = "ADD-POST";
-const UPDATE_NEW_POST_TEXT = "UPDATE-NEW-POST-TEXT";
+const DELETE_POST = "DELETE_POST";
 const SET_USER_PROFILE = "SET_USER_PROFILE";
 const SET_STATUS = "SET_STATUS";
 
@@ -24,32 +24,16 @@ const profileReducer = (state = initialState, action) => {
     case ADD_POST:
       return {
         ...state,
-        newPostText: "",
         posts: [
           ...state.posts,
-          { id: 6, message: state.newPostText, liksCounter: 0 },
+          { id: 6, message: action.newPostText, liksCounter: 0 },
         ],
       };
-    // let mes = {
-    //   id: "6",
-    //   message: state.newPostText,
-    //   liksCounter: "0",
-    // };
-    // //Смотри пояснения в readme к 47 уроку
-    // let stateCopy = { ...state };
-    // stateCopy.posts = [...state.posts];
-    // stateCopy.posts.push(mes);
-    // stateCopy.newPostText = "";
-    // return stateCopy;
-
-    case UPDATE_NEW_POST_TEXT:
+    case DELETE_POST:
       return {
         ...state,
-        newPostText: action.newText,
+        posts: state.posts.filter((p) => p.id !== action.postId),
       };
-    //   let stateCopy = { ...state };
-    //   stateCopy.newPostText = action.newText;
-    //   return stateCopy;
     case SET_USER_PROFILE:
       return {
         ...state,
@@ -65,13 +49,8 @@ const profileReducer = (state = initialState, action) => {
   }
 };
 
-export const addPost = () => ({ type: ADD_POST });
-
-export const updateNewPostText = (text) => ({
-  type: UPDATE_NEW_POST_TEXT,
-  newText: text,
-});
-
+export const addPost = (text) => ({ type: ADD_POST, newPostText: text });
+export const deletePost = (postId) => ({ type: DELETE_POST, postId });
 export const setUserProfile = (profile) => ({
   type: SET_USER_PROFILE,
   profile,
@@ -103,3 +82,5 @@ export const updateStatus = (status) => (dispatch) => {
   });
 };
 export default profileReducer;
+// module.exports = profileReducer;
+// module.exports = addPost;
