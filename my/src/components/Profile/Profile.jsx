@@ -3,16 +3,27 @@ import s from "./Profile.module.css";
 import MyPostsContainer from "./MyPosts/MyPostsContainer";
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
 
-const Profile = (props) => {
+const Profile = ({
+  isOwner,
+  profile,
+  updateStatus,
+  status,
+  posts,
+  savePhoto,
+  saveProfile,
+}) => {
   // console.log(props);
   return (
     <div className={s.profile}>
       <ProfileInfo
-        profile={props.profile}
-        updateStatus={props.updateStatus}
-        status={props.status}
+        isOwner={isOwner}
+        profile={profile}
+        updateStatus={updateStatus}
+        status={status}
+        savePhoto={savePhoto}
+        saveProfile={saveProfile}
       />
-      <MyPostsContainer posts={props.posts} />
+      <MyPostsContainer posts={posts} />
     </div>
   );
 };
