@@ -3,12 +3,19 @@ import s from "./Navbar.module.css";
 import { NavLink } from "react-router-dom";
 import NavbarFrendsContainer from "./NavbarFrendsContainer";
 
+
+
+
 const Navbar = (props) => {
   // debugger;
-
+  const [mode, setMode] = React.useState(false)
+  const chengeMode =()=>{
+    setMode(true)
+  }
   return (
-    <nav className={s.nav}>
-      <div>
+  <nav className={s.nav}>
+    {mode && <div>
+     <div>
         <NavLink
           to="/profile"
           className={(navData) => (navData.isActive ? s.active : s.item)}
@@ -69,13 +76,32 @@ const Navbar = (props) => {
       </div>
       <div>
         <NavLink
-          to="/hooks"
+          to="/fcc" onClick={chengeMode}
           className={(navData) => (navData.isActive ? s.active : s.item)}
         >
-          Ex
+          FreeCodeCamp
         </NavLink>
       </div>
-    </nav>
-  );
-};
-export default Navbar;
+      </div>}
+      {!mode&&<div>
+        <div>
+        <NavLink
+          to="/fcc/drummachin"
+          className={(navData) => (navData.isActive ? s.active : s.item)}
+        >
+          Dram Machine
+        </NavLink>
+      </div>
+      <div>
+        <NavLink
+          to="/fcc/calculator"
+          className={(navData) => (navData.isActive ? s.active : s.item)}
+        >
+          Calculator
+        </NavLink></div>
+        <div><button onClick={chengeMode}>Back</button></div>
+        </div>}
+        </nav>);
+  };
+
+export default Navbar

@@ -5,16 +5,18 @@ import Navbar from "./components/Navbar/Navbar";
 // import ProfileContainer from "./components/Profile/ProfileContainer";
 // import DialogsContainer from "./components/Dialogs/DialogsContainer";
 import { Route, Routes } from "react-router-dom";
-import News from "./components/News/News";
+// import News from "./components/News/News";
 import Music from "./components/Music/Music";
 import Settings from "./components/Settings/Settings";
 import UsersContainer from "./components/Users/UsersContainer";
 import Login from "./components/Login/Login.jsx";
-import { Exsemple } from "./exemples/hooks";
 import { connect } from "react-redux";
-import { initialazeApp } from "../src/redux/app-reducer";
+import { initialazeApp } from "./redux/app-reducer";
 import Preloader from "./components/Common/PreLoader/Preloader";
 import { withSuspense } from "./hoc/withSuspense";
+// import { DrumMachine } from "./FreeCodeCamp/DrumMachine";
+import { AppStateType } from "./redux/redux-store";
+// import { Calculator } from "./FreeCodeCamp/Calculator";
 
 const ProfileContainer = React.lazy(() =>
   import("./components/Profile/ProfileContainer")
@@ -23,10 +25,21 @@ const DialogsContainer = React.lazy(() =>
   import("./components/Dialogs/DialogsContainer")
 );
 
-class App extends React.Component {
-  catchAllUnhandledErrors = (promiseRejectionEvent) => {
+type PropsType = {
+  initialazeApp: ()=>void
+  initialazed: boolean
+  
+}
+
+type StateType = {
+}
+
+
+class App extends React.Component<PropsType,StateType> {
+  catchAllUnhandledErrors = (e: PromiseRejectionEvent) => {
+    // debugger
     alert("Something error occured");
-    console.error(promiseRejectionEvent);
+    console.error(PromiseRejectionEvent);
   };
   componentDidMount = () => {
     this.props.initialazeApp();
@@ -65,13 +78,16 @@ class App extends React.Component {
               path="/dialogscontainer/*"
               element={<DialogsContainerWithSuspense />}
             />
-            <Route path="/users/*" element={<UsersContainer />} />
-            <Route path="/news/*" element={<News />} />
+            <Route path="/users/*" element={<UsersContainer 
+            // pageTitle = { 'Samuray'}
+            />} />
+            {/* <Route path="/news/*" element={<News />} /> */}
             <Route path="/music/*" element={<Music />} />
             <Route path="/settings/*" element={<Settings />} />
             {/* <Route path="/login/facebook*" element={<div>facebook</div>} /> */}
             <Route path="/login/*" element={<Login />} />
-            <Route path="/hooks/*" element={<Exsemple />} />
+            {/* <Route path="/fcc.drumMachine/*" element={<DrumMachine />} /> */}
+            {/* <Route path="/fcc.calculator/*" element={<Calculator />} /> */}
             <Route path="*" element={<div>ERORR 404 - NOT FOUND</div>} />
           </Routes>
         </div>
@@ -80,7 +96,7 @@ class App extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state: AppStateType) => ({
   initialazed: state.app.initialazed,
 });
 

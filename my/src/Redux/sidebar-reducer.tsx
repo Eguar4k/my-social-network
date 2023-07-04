@@ -5,6 +5,14 @@ import yasya from "./../img/avatars/yasya.jpg";
 import vasya from "./../img/avatars/vasya.jpg";
 import alla from "./../img/avatars/alla.jpg";
 
+
+type AvatarsType = {
+  id: number
+  name: string
+  img: any
+}
+
+
 let initialState = {
   avatars: [
     { id: 1, name: "Igor", img: igor },
@@ -13,11 +21,14 @@ let initialState = {
     { id: 4, name: "Yasya", img: yasya },
     { id: 5, name: "Yarik", img: yarik },
     { id: 6, name: "Alla", img: alla },
-  ],
+  ] as Array<AvatarsType>,
 };
 
-const sidebarReducer = (state = initialState, action) => {
+
+const sidebarReducer = (state = initialState, action: any):InitialStateType => {
   return state;
 };
 
 export default sidebarReducer;
+
+type InitialStateType = typeof initialState

@@ -1,0 +1,25 @@
+/* .img {
+   width: 65px;
+   height: 70px;
+};
+.user{
+margin: 10px;
+}
+
+.selectPage {
+   font-weight: bold;
+   
+}
+
+.pages {
+   cursor: pointer; */
+/* } */
+.pageNumber{
+   padding: 1px;
+   border: 1px solid black;
+   cursor: pointer;
+}
+.pageNumber.selectedPage {
+   font-weight: bold;
+   border-color: white;
+}

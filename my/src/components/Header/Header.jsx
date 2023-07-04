@@ -6,7 +6,9 @@ import { NavLink } from "react-router-dom";
 const Header = (props) => {
   return (
     <header className={s.header}>
+    <div className={s.wrapper}>
       <img src={logo} className="App-logo" alt="logo" />
+      <div className={s.profetion}>Front-End Developer on React</div>
       <div className={s.loginBlock}>
         {props.isAuth ? (
           <div>
@@ -15,6 +17,7 @@ const Header = (props) => {
         ) : (
           <NavLink to={"/login"}>Login</NavLink>
         )}
+      </div>
       </div>
     </header>
   );
